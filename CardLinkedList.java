@@ -6,13 +6,18 @@
  * @author Joshua Breite
  */
 public class CardLinkedList {
-  public Node head;
+  private Node head;
 
   // Constructor
-  public class Node {
+  private class Node {
     Card card;
     Node next;
 
+    /**
+     * Constructor for Node class
+     *
+     * @param card the card to be stored in the node
+     */
     public Node(Card card) {
       this.card = card;
       this.next = null;
@@ -24,10 +29,11 @@ public class CardLinkedList {
     return head == null;
   }
 
-  // Add a card to the end of the linked list
+  // Get the length of the linked list
   public int getLength() {
     int length = 0;
     Node current = head;
+    // Traverse the linked list to count the number of nodes
     while (current != null) {
       length++;
       current = current.next;
@@ -42,6 +48,7 @@ public class CardLinkedList {
    */
   public boolean hasCard(Card card) {
     Node current = head;
+    // Traverse the linked list to check if the specified card is present
     while (current != null) {
       if (current.card.equals(card)) {
         return true;
@@ -57,15 +64,22 @@ public class CardLinkedList {
    * @param card the card to be added
    */
   public Card getCardAt(int index) {
+    // Out of bounds check: if the index is negative, throw an exception
     if (index < 0) {
       throw new IndexOutOfBoundsException("Index must be non-negative");
     }
+    // Traverse the linked list to find the card at the specified index
     Node current = head;
     int currentIndex = 0;
     while (current != null) {
+      /**
+       * If the current index matches the specified index, return the card at that
+       * index
+       */
       if (currentIndex == index) {
         return current.card;
       }
+      // Move to the next node in the linked list and increment the current index
       current = current.next;
       currentIndex++;
     }
@@ -79,13 +93,19 @@ public class CardLinkedList {
    */
   public void add(Card card) {
     Node newNode = new Node(card);
+    // Base case: if the linked list is empty, set the head to the new node
     if (head == null) {
       head = newNode;
     } else {
+      /**
+       * Traverse the linked list to find the last node and add the new node at the
+       * end
+       */
       Node current = head;
       while (current.next != null) {
         current = current.next;
       }
+      // Set the next pointer of the last node to the new node
       current.next = newNode;
     }
   }
@@ -96,19 +116,34 @@ public class CardLinkedList {
    * @param card the card to be removed
    */
   public void remove(Card card) {
+    // Base case: if the linked list is empty, return
     if (head == null) {
       return;
     }
+    // If the head node is the card to be removed, update the head to the next node
     if (head.card.equals(card)) {
       head = head.next;
       return;
     }
     Node current = head;
+    // Traverse the linked list to find the card to be removed
     while (current.next != null) {
       if (current.next.card.equals(card)) {
         current.next = current.next.next;
         return;
       }
+      // Move to the next node in the linked list
+      current = current.next;
+    }
+  }
+
+  // Print the linked list
+  public void print() {
+    System.out.println();
+    Node current = head;
+    // Print each card in the linked list recursively
+    while (current != null) {
+      System.out.print(current.card.print() + ",");
       current = current.next;
     }
   }
