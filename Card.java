@@ -17,12 +17,6 @@ public class Card {
   }
 
   /**
-   * Returns the number of the card
-   *
-   * @return number: the number of the card
-   */
-
-  /**
    * Getter for number
    *
    * @return number: the number of the card
@@ -57,6 +51,12 @@ public class Card {
     return numberString + " of " + suit;
   }
 
+  /**
+   * Overrides the equals method to compare two Card objects
+   *
+   * @param o: the object to compare with
+   * @return true if the cards are equal, false otherwise
+   */
   public boolean equals(Object o) {
     // Check if the object is the same as this
     if (this == o) {
@@ -71,19 +71,4 @@ public class Card {
     return number == card.number && suit.equals(card.suit);
   }
 
-  /**
-   * Main method to test the Card class
-   *
-   * @param args: command line arguments
-   */
-  public static void main(String[] args) {
-    Card card1 = new Card(1, "hearts");
-    Card card2 = new Card(11, "diamonds");
-    Card card3 = new Card(7, "clubs");
-    System.out.println(card1.print());
-    System.out.println(card2.print());
-    System.out.println(card3.print());
-    System.out.println(card1.equals(card1));
-    System.out.println(card1.equals(card2));
-  }
 }
