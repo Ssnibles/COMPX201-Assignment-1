@@ -8,7 +8,7 @@ public class Main {
   /**
    * Main method to test the Card class
    *
-   * @param args: command line arguments
+   * @param args command line arguments
    */
   public static void main(String[] args) {
     // Create some Card objects
@@ -17,18 +17,29 @@ public class Main {
     Card card3 = new Card(7, "clubs");
 
     // Test the print method
+    System.out.println("Cards:");
     System.out.println(card1.print());
     System.out.println(card2.print());
-    System.out.println(card3.print());
+    System.out.println(card3.print() + "\n");
 
     // Test the equals method
-    System.out.println(card1.equals(card1));
-    System.out.println(card1.equals(card2));
+    System.out.println("Does card1 equal card1: " + card1.equals(card1));
+    System.out.println("Does card1 equal card2: " + card1.equals(card2) + "\n");
 
     // Test the CardLinkedList class
-    CardLinkedList node1 = new CardLinkedList();
-    node1.add(card1);
-    System.out.println(node1.getLength());
+    CardLinkedList list1 = new CardLinkedList();
+    CardLinkedList list2 = new CardLinkedList();
+    // Add new cards to node
+    list1.add(card1);
+    list1.add(card2);
+    list1.add(card3);
+    list2.add(card1);
+    list2.add(card2);
+    list2.add(card3);
+    System.out.println("list1 length: " + list1.getLength());
+    System.out.println("list2 length: " + list2.getLength());
+    list1.print();
+    list2.print();
   }
 
 }
