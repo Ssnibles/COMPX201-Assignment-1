@@ -8,8 +8,8 @@ public class Card {
   /**
    * Constructor for Card class
    *
-   * @param number: the number of the card (1-13)
-   * @param suit:   the suit of the card (hearts, diamonds, clubs, spades)
+   * @param number the number of the card (1-13)
+   * @param suit   the suit of the card (hearts, diamonds, clubs, spades)
    */
   public Card(int number, String suit) {
     this.number = number;
@@ -19,7 +19,7 @@ public class Card {
   /**
    * Getter for number
    *
-   * @return number: the number of the card
+   * @return number the number of the card
    */
   public int getNumber() {
     return number;
@@ -28,7 +28,7 @@ public class Card {
   /**
    * Returns the suit of the card
    *
-   * @return suit: the suit of the card
+   * @return suit the suit of the card
    */
   public String print() {
     String numberString;
@@ -54,7 +54,7 @@ public class Card {
   /**
    * Overrides the equals method to compare two Card objects
    *
-   * @param o: the object to compare with
+   * @param o the object to compare with
    * @return true if the cards are equal, false otherwise
    */
   public boolean equals(Object o) {
