@@ -57,16 +57,55 @@ public class CardPlay {
 
     // Randomly select a card from the remaining deck to place in the center and
     // print it
-    int currentDeckSize = deck.getLength();
-    if (currentDeckSize > 0) {
-      System.out.println("Cards remaining in the deck: " + currentDeckSize);
-      int randomCard = rand.nextInt(currentDeckSize);
+    int currentDeck = deck.getLength();
+    if (currentDeck > 0) {
+      System.out.println("Cards remaining in the deck: " + currentDeck);
+      int randomCard = rand.nextInt(currentDeck);
       Card startingCard = deck.getCardAt(randomCard);
       deck.remove(startingCard);
       center.add(startingCard);
       System.out.println("Starting card in the center: " + startingCard.print());
     } else {
       System.out.println("No cards remaining in the deck.");
+    }
+
+    boolean gameRunning = true;
+    int currentPlayer = 0;
+
+    // Main game loop
+    while (gameRunning) {
+      System.out.println("Player " + (currentPlayer + 1) + "'s turn:");
+
+      // Print the top card in the center
+      Card topCard = center.getCardAt(0);
+      System.out.println("Top card: " + topCard.print());
+
+      // Attempt to play a card from the current player's hand that matches the top
+      // card in the center
+      boolean cardPlayed = hands[currentPlayer].play(center);
+
+      // If the player played a card, print the action. Otherwise, draw a card from
+      // the
+      if (cardPlayed) {
+        System.out.println("Player " + (currentPlayer + 1) + " played a card.");
+      } else {
+        Card drawnCard = deck.getCardAt(rand.nextInt(deck.getLength()));
+        if (drawnCard != null) {
+          hands[currentPlayer].add(drawnCard);
+          deck.remove(drawnCard);
+          System.out.println("Player " + (currentPlayer + 1) + " drew a card.");
+        } else {
+          System.out.println("No cards left to draw.");
+        }
+      }
+
+      // Check if the current player has won by checking if their hand is empty
+      if (hands[currentPlayer].getLength() == 0) {
+        System.out.println("Player " + (currentPlayer + 1) + " wins!");
+        gameRunning = false;
+      } else {
+        currentPlayer = (currentPlayer + 1) % hands.length;
+      }
     }
   }
 }
