@@ -7,6 +7,7 @@
  */
 public class CardLinkedList {
   private Node head;
+  private Node tail;
 
   // Constructor
   private class Node {
@@ -96,20 +97,12 @@ public class CardLinkedList {
    */
   public void add(Card card) {
     Node newNode = new Node(card);
-    // Base case: if the linked list is empty, set the head to the new node
     if (head == null) {
       head = newNode;
+      tail = newNode;
     } else {
-      /**
-       * Traverse the linked list to find the last node and add the new node at the
-       * end
-       */
-      Node current = head;
-      while (current.next != null) {
-        current = current.next;
-      }
-      // Set the next pointer of the last node to the new node
-      current.next = newNode;
+      tail.next = newNode;
+      tail = newNode;
     }
   }
 
@@ -146,7 +139,7 @@ public class CardLinkedList {
     Node current = head;
     // Print each card in the linked list recursively
     while (current != null) {
-      System.out.print(current.card.print() + ",");
+      System.out.print(current.card.print() + ", ");
       current = current.next;
     }
   }
