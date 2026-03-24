@@ -7,7 +7,6 @@
  */
 public class CardLinkedList {
   private Node head;
-  private Node tail;
 
   // Constructor
   private class Node {
@@ -97,13 +96,8 @@ public class CardLinkedList {
    */
   public void add(Card card) {
     Node newNode = new Node(card);
-    if (head == null) {
-      head = newNode;
-      tail = newNode;
-    } else {
-      tail.next = newNode;
-      tail = newNode;
-    }
+    newNode.next = head;
+    head = newNode;
   }
 
   /**
@@ -142,5 +136,21 @@ public class CardLinkedList {
       System.out.print(current.card.print() + ", ");
       current = current.next;
     }
+  }
+
+  /*
+   * Draw a card from the linked list. This method removes the head of the linked
+   * list and returns the card at the head.
+   *
+   * @return the card that was drawn from the linked list, or null if the linked
+   * list is empty
+   */
+  public Card drawCard() {
+    if (head == null) {
+      return null;
+    }
+    Card card = head.card;
+    head = head.next;
+    return card;
   }
 }

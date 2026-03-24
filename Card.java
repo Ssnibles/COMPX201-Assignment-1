@@ -70,5 +70,4 @@ public class Card {
     Card card = (Card) obj;
     return number == card.number && suit.equals(card.suit);
   }
-
 }
