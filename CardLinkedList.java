@@ -138,12 +138,12 @@ public class CardLinkedList {
     }
   }
 
-  /*
+  /**
    * Draw a card from the linked list. This method removes the head of the linked
    * list and returns the card at the head.
    *
    * @return the card that was drawn from the linked list, or null if the linked
-   * list is empty
+   *         list is empty
    */
   public Card drawCard() {
     if (head == null) {
@@ -152,5 +152,34 @@ public class CardLinkedList {
     Card card = head.card;
     head = head.next;
     return card;
+  }
+
+  /**
+   * Play a card from the hand onto the pile. This method checks if any card in
+   * the
+   * hand can be played on top of the pile's top card. If a valid card is found,
+   * it is removed from the hand and added to the pile.
+   *
+   * @param pile the CardLinkedList representing the pile of cards
+   * @return true if a card was successfully played, false otherwise
+   */
+  public boolean play(CardLinkedList pile) {
+    if (pile.isEmpty())
+      return false;
+
+    // The top of the pile is the first card
+    Card topCard = pile.getCardAt(0);
+    Node current = head;
+
+    while (current != null) {
+      if (current.card.isValidPlay(topCard)) {
+        Card cardToPlay = current.card;
+        this.remove(cardToPlay); // Remove from hand
+        pile.add(cardToPlay); // Add to pile
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
   }
 }
