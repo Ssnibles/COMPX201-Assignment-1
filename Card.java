@@ -54,20 +54,20 @@ public class Card {
   /**
    * Overrides the equals method to compare two Card objects
    *
-   * @param o the object to compare with
+   * @param obj the object to compare with
    * @return true if the cards are equal, false otherwise
    */
-  public boolean equals(Object o) {
+  public boolean equals(Object obj) {
     // Check if the object is the same as this
-    if (this == o) {
+    if (this == obj) {
       return true;
     }
     // Check if the object is null or of different class
-    if (o == null || getClass() != o.getClass()) {
+    if (obj == null || getClass() != obj.getClass()) {
       return false;
     }
     // Cast the object to Card and compare the number and suit
-    Card card = (Card) o;
+    Card card = (Card) obj;
     return number == card.number && suit.equals(card.suit);
   }
 
