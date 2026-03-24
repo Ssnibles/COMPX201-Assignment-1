@@ -25,7 +25,7 @@ public class CardLinkedList {
   }
 
   // Check if the linked list is empty
-  public boolean isEmpy() {
+  public boolean isEmpty() {
     return head == null;
   }
 
@@ -42,9 +42,10 @@ public class CardLinkedList {
   }
 
   /**
-   * Add a card to the end of the linked list
+   * Check if a specific card is present in the linked list
    *
-   * @param card the card to be added
+   * @param card the card to be checked for presence in the linked list
+   * @return true if the card is present, false otherwise
    */
   public boolean hasCard(Card card) {
     Node current = head;
@@ -59,9 +60,11 @@ public class CardLinkedList {
   }
 
   /**
-   * Add a card to the end of the linked list
+   * Get the card at a specific index in the linked list
    *
-   * @param card the card to be added
+   * @param index the index of the card to be retrieved
+   * @return the card at the specified index
+   * @throws IndexOutOfBoundsException if the index is out of bounds
    */
   public Card getCardAt(int index) {
     // Out of bounds check: if the index is negative, throw an exception
@@ -89,7 +92,7 @@ public class CardLinkedList {
   /**
    * Add a card to the end of the linked list
    *
-   * @param card the card to be added
+   * @param card the card to be added to the linked list
    */
   public void add(Card card) {
     Node newNode = new Node(card);
@@ -111,9 +114,9 @@ public class CardLinkedList {
   }
 
   /**
-   * Remove a card from the linked list
+   * Remove a specific card from the linked list
    *
-   * @param card the card to be removed
+   * @param card the card to be removed from the linked list
    */
   public void remove(Card card) {
     // Base case: if the linked list is empty, return

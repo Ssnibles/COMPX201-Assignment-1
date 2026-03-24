@@ -1,5 +1,5 @@
 /**
- * CardPlay
+ * CardPlay.java
  */
 public class CardPlay {
   public static void main(String[] args) {

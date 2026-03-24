@@ -28,7 +28,7 @@ public class Main {
     CardLinkedList list2 = new CardLinkedList();
 
     // Test Initial State
-    System.out.println("Is list1 empty? " + list1.isEmpy());
+    System.out.println("Is list1 empty? " + list1.isEmpty());
 
     // Adding Cards
     list1.add(card1);
