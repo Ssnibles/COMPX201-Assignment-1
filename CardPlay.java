@@ -74,38 +74,47 @@ public class CardPlay {
 
     // Main game loop
     while (gameRunning) {
-      System.out.println("Player " + (currentPlayer + 1) + "'s turn:");
-
-      // Print the top card in the center
-      Card topCard = center.getCardAt(0);
-      System.out.println("Top card: " + topCard.print());
-
-      // Attempt to play a card from the current player's hand that matches the top
-      // card in the center
+      // Try to play a card
       boolean cardPlayed = hands[currentPlayer].play(center);
 
-      // If the player played a card, print the action. Otherwise, draw a card from
-      // the
-      if (cardPlayed) {
-        System.out.println("Player " + (currentPlayer + 1) + " played a card.");
-      } else {
-        Card drawnCard = deck.getCardAt(rand.nextInt(deck.getLength()));
+      // If no card was played, draw a card from the deck
+      if (!cardPlayed) {
+        Card drawnCard = deck.drawCard();
         if (drawnCard != null) {
           hands[currentPlayer].add(drawnCard);
-          deck.remove(drawnCard);
-          System.out.println("Player " + (currentPlayer + 1) + " drew a card.");
-        } else {
-          System.out.println("No cards left to draw.");
         }
       }
 
-      // Check if the current player has won by checking if their hand is empty
-      if (hands[currentPlayer].getLength() == 0) {
-        System.out.println("Player " + (currentPlayer + 1) + " wins!");
+      // Check if the game has ended (if the deck is empty or any player has no cards
+      // left)
+      if (deck.isEmpty() || hands[currentPlayer].isEmpty()) {
         gameRunning = false;
+        System.out.println("Player " + (currentPlayer + 1) + " wins!");
       } else {
         currentPlayer = (currentPlayer + 1) % hands.length;
       }
+    }
+
+    // Find the minimum number of cards in any player's hand
+    int minCards = hands[0].getLength();
+    for (int i = 1; i < hands.length; i++) {
+      if (hands[i].getLength() < minCards) {
+        minCards = hands[i].getLength();
+      }
+    }
+
+    System.out.println("Final pile:");
+    center.print();
+
+    // Print the final hands of all players and declare the winner(s)
+    System.out.println("\n\nFinal hands:");
+    for (int i = 0; i < hands.length; i++) {
+      if (hands[i].getLength() == minCards) {
+        System.out.println("Winner: Player " + (i + 1));
+      }
+      System.out.println("Player " + (i + 1) + ":");
+      hands[i].print();
+      System.out.println();
     }
   }
 }
