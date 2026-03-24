@@ -1,6 +1,7 @@
 /**
  * A main class to test the Card and CardLinkedList classes.
- * * @author Joshua Breite
+ *
+ * @author Joshua Breite
  */
 public class Main {
   public static void main(String[] args) {

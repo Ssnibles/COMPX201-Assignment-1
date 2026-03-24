@@ -1,5 +1,7 @@
 /**
- * Card
+ * Card class represents a playing card with a number and suit
+ *
+ * @author Joshua Breite
  */
 public class Card {
   private int number;
