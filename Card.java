@@ -72,4 +72,20 @@ public class Card {
     Card card = (Card) obj;
     return number == card.number && suit.equals(card.suit);
   }
+
+  /**
+   * Checks if the card can be played on top of another card based on the game
+   * rules
+   *
+   * @param c the card to compare with
+   * @return true if the card can be played, false otherwise
+   */
+  public boolean isValidPlay(Card c) {
+    // Check if the suits match
+    if (this.suit.equals(c.suit)) {
+      return true;
+    }
+    // Check if the number is exactly one higher or lower
+    return Math.abs(this.number - c.number) == 1;
+  }
 }
