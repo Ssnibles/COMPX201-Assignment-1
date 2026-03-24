@@ -61,6 +61,6 @@ public class Main {
     System.out.println("Final List 2 content:");
     list2.print();
 
-    CardPlay.main(args);
+    CardPlay.main(null);
   }
 }
