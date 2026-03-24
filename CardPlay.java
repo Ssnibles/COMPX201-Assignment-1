@@ -3,19 +3,18 @@
  */
 public class CardPlay {
   public static void main(String[] args) {
-    CardLinkedList Deck = new CardLinkedList();
+    // Create a new CardLinkedList to represent the deck of cards
+    CardLinkedList deck = new CardLinkedList();
 
-    for (int i = 12; i < args.length; i++) {
-      Card spade = new Card(i, "Spades");
-      Card club = new Card(i, "Clubs");
-      Card diamond = new Card(i, "Diamonds");
-      Card heart = new Card(i, "Hearts");
-      Deck.add(spade);
-      Deck.add(club);
-      Deck.add(diamond);
-      Deck.add(heart);
-      Deck.print();
+    // Define the suits of the cards
+    String[] suits = { "Spades", "Clubs", "Diamonds", "Hearts" };
+
+    // Create a standard deck of 52 cards
+    for (int i = 1; i <= 13; i++) {
+      for (String suit : suits) {
+        deck.add(new Card(i, suit));
+      }
     }
-
+    deck.print();
   }
 }
