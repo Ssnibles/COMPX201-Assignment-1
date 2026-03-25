@@ -1,83 +1,76 @@
 import java.util.Random;
 
 /**
- * CardPlay class to demonstrate the use of Card and CardLinkedList classes to
- * create a deck of cards,
- * distribute them to players, and print their hands.
+ * CardPlay class to simulate a card game using CardLinkedList and Card classes
  *
  * @author Joshua Breite
  */
 public class CardPlay {
   public static void main(String[] args) {
-    // Create a new CardLinkedList to represent the deck of cards
+    int numPlayers = 4;
+    int startingHandSize = 5;
+    int maxCardNumber = 13;
+
+    // Create the deck and center piles
     CardLinkedList deck = new CardLinkedList();
     CardLinkedList center = new CardLinkedList();
-    Random rand = new Random();
-    // Define the suits of the cards
-    String[] suits = { "Spades", "Clubs", "Diamonds", "Hearts" };
-    // Create an array of CardLinkedList to represent the hands of 4 players
-    CardLinkedList[] hands = new CardLinkedList[4];
 
-    // Create a standard deck of 52 cards
-    for (int i = 1; i <= 13; i++) {
-      for (String suit : suits) {
+    // Define the suits for the cards
+    String[] suits = { "Spades", "Clubs", "Diamonds", "Hearts" };
+
+    // Create an array of CardLinkedList to represent each players hand
+    CardLinkedList[] hands = new CardLinkedList[numPlayers];
+    Random rand = new Random();
+
+    // Populate the deck with cards of each suit and number
+    for (String suit : suits) {
+      for (int i = 1; i <= maxCardNumber; i++) {
         deck.add(new Card(i, suit));
       }
     }
 
+    // Initilise each player's hand as an empty CardLinkedList
     for (int i = 0; i < hands.length; i++) {
       hands[i] = new CardLinkedList();
     }
 
-    /*
-     * Distribute 5 cards to each player's hand by randomly selecting cards from the
-     * deck and removing them from the deck
-     */
+    // Distribute cards to each players hand from the deck
     for (int handIndex = 0; handIndex < hands.length; handIndex++) {
-      for (int cardIndex = 0; cardIndex < 5; cardIndex++) {
+      for (int cardIndex = 0; cardIndex < startingHandSize; cardIndex++) {
         int deckSize = deck.getLength();
         if (deckSize > 0) {
-          int ranomIndex = rand.nextInt(deckSize);
-          Card card = deck.getCardAt(ranomIndex);
-
+          // Select a random card from the deck and add it to the players hand
+          int randomIndex = rand.nextInt(deckSize);
+          Card card = deck.getCardAt(randomIndex);
           deck.remove(card);
           hands[handIndex].add(card);
         }
       }
     }
 
-    // Print the hands of cards for each player
-    for (int i = 0; i < hands.length; i++) {
-      System.out.println("Hand " + (i + 1) + ":");
-      for (int j = 0; j < hands[i].getLength(); j++) {
-        System.out.println(hands[i].getCardAt(j).print());
-      }
-      System.out.println();
-    }
-
-    // Randomly select a card from the remaining deck to place in the center and
-    // print it
-    int currentDeck = deck.getLength();
-    if (currentDeck > 0) {
-      System.out.println("Cards remaining in the deck: " + currentDeck);
-      int randomCard = rand.nextInt(currentDeck);
+    // Place a random card from the deck into the center pile to start the game
+    int deckSize = deck.getLength();
+    if (deckSize > 0) {
+      int randomCard = rand.nextInt(deckSize);
       Card startingCard = deck.getCardAt(randomCard);
       deck.remove(startingCard);
       center.add(startingCard);
-      System.out.println("Starting card in the center: " + startingCard.print());
-    } else {
-      System.out.println("No cards remaining in the deck.");
     }
 
     boolean gameRunning = true;
     int currentPlayer = 0;
 
-    // Main game loop
+    /**
+     * Simulate the game by allowing each player to play a card from their hand to
+     * the center pile
+     * If a player cannot play a card, they draw a card from the deck
+     * The game continues until the deck is empty or a player has no cards left in
+     * their hand
+     */
     while (gameRunning) {
-      // Try to play a card
       boolean cardPlayed = hands[currentPlayer].play(center);
 
-      // If no card was played, draw a card from the deck
+      // If the player cannot play a card, they draw a card from the deck
       if (!cardPlayed) {
         Card drawnCard = deck.drawCard();
         if (drawnCard != null) {
@@ -85,17 +78,16 @@ public class CardPlay {
         }
       }
 
-      // Check if the game has ended (if the deck is empty or any player has no cards
-      // left)
+      // Check if the game should continue or if a player has won
       if (deck.isEmpty() || hands[currentPlayer].isEmpty()) {
         gameRunning = false;
-        System.out.println("Player " + (currentPlayer + 1) + " wins!");
       } else {
         currentPlayer = (currentPlayer + 1) % hands.length;
       }
     }
 
-    // Find the minimum number of cards in any player's hand
+    // Determine the winner by finding the player with the fewest cards left
+    // in their hand
     int minCards = hands[0].getLength();
     for (int i = 1; i < hands.length; i++) {
       if (hands[i].getLength() < minCards) {
@@ -103,16 +95,19 @@ public class CardPlay {
       }
     }
 
+    // Print the final state of the center pile and each players hand, indicating
+    // the winners
     System.out.println("Final pile:");
     center.print();
+    System.out.println("\n");
 
-    // Print the final hands of all players and declare the winner(s)
-    System.out.println("\n\nFinal hands:");
+    // Print each players hand and indicate the winner
+    System.out.println("Final hands:");
     for (int i = 0; i < hands.length; i++) {
       if (hands[i].getLength() == minCards) {
-        System.out.println("Winner: Player " + (i + 1));
+        System.out.print("WINNER! ");
       }
-      System.out.println("Player " + (i + 1) + ":");
+      System.out.print("Player " + (i + 1) + ": ");
       hands[i].print();
       System.out.println();
     }

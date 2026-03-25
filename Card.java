@@ -28,9 +28,18 @@ public class Card {
   }
 
   /**
-   * Returns the suit of the card
+   * Getter for suit
    *
    * @return suit the suit of the card
+   */
+  public String getSuit() {
+    return suit;
+  }
+
+  /**
+   * Returns a string representation of the card
+   *
+   * @return a string in the format "Number of Suit"
    */
   public String print() {
     String numberString;
@@ -56,21 +65,21 @@ public class Card {
   /**
    * Overrides the equals method to compare two Card objects
    *
-   * @param obj the object to compare with
+   * @param o the object to compare with
    * @return true if the cards are equal, false otherwise
    */
-  public boolean equals(Object obj) {
-    // Check if the object is the same as this
-    if (this == obj) {
+  public boolean equals(Object o) {
+    // Check if the object is the same instance
+    if (this == o) {
       return true;
     }
-    // Check if the object is null or of different class
-    if (obj == null || getClass() != obj.getClass()) {
+    // Check if the object is null or of a different class
+    if (o == null || getClass() != o.getClass()) {
       return false;
     }
     // Cast the object to Card and compare the number and suit
-    Card card = (Card) obj;
-    return number == card.number && suit.equals(card.suit);
+    Card card = (Card) o;
+    return this.number == card.number && suit.equals(card.suit);
   }
 
   /**

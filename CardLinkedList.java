@@ -129,7 +129,6 @@ public class CardLinkedList {
 
   // Print the linked list
   public void print() {
-    System.out.println();
     Node current = head;
     // Print each card in the linked list recursively
     while (current != null) {
