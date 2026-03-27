@@ -8,10 +8,10 @@ public class Card {
   private String suit;
 
   /**
-   * Constructor for Card class
+   * Constructor for the Card class
    *
-   * @param number the number of the card (1-13)
-   * @param suit   the suit of the card (hearts, diamonds, clubs, spades)
+   * @param number the number of the card
+   * @param suit   the suit of the card
    */
   public Card(int number, String suit) {
     this.number = number;
@@ -39,26 +39,17 @@ public class Card {
   /**
    * Returns a string representation of the card
    *
-   * @return a string in the format "Number of Suit"
+   * @return a string in the format "number of suit"
    */
   public String print() {
     String numberString;
-    switch (number) {
-      case 1:
-        numberString = "Ace";
-        break;
-      case 11:
-        numberString = "Jack";
-        break;
-      case 12:
-        numberString = "Queen";
-        break;
-      case 13:
-        numberString = "King";
-        break;
-      default:
-        numberString = Integer.toString(number);
-    }
+    numberString = switch (number) {
+      case 1 -> "Ace";
+      case 11 -> "Jack";
+      case 12 -> "Queen";
+      case 13 -> "King";
+      default -> Integer.toString(number);
+    };
     return numberString + " of " + suit;
   }
 

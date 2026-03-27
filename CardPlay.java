@@ -1,7 +1,12 @@
 import java.util.Random;
 
 /**
- * CardPlay class to simulate a card game using CardLinkedList and Card classes
+ * Simulates a card game where players draw and play cards from their hands to a
+ * center pile.
+ * The game continues until the deck is empty or a player has no cards left in
+ * their hand.
+ * The player with the fewest cards left in their hand at the end of the game is
+ * declared the winner.
  *
  * @author Joshua Breite
  */
@@ -29,7 +34,7 @@ public class CardPlay {
       }
     }
 
-    // Initilise each player's hand as an empty CardLinkedList
+    // Initilise each players hand as an empty CardLinkedList
     for (int i = 0; i < hands.length; i++) {
       hands[i] = new CardLinkedList();
     }
@@ -60,13 +65,7 @@ public class CardPlay {
     boolean gameRunning = true;
     int currentPlayer = 0;
 
-    /**
-     * Simulate the game by allowing each player to play a card from their hand to
-     * the center pile
-     * If a player cannot play a card, they draw a card from the deck
-     * The game continues until the deck is empty or a player has no cards left in
-     * their hand
-     */
+    // Main game loop
     while (gameRunning) {
       boolean cardPlayed = hands[currentPlayer].play(center);
 

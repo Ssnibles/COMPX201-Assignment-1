@@ -1,20 +1,19 @@
 /**
- * A class representing a linked list of cards. This class provides methods to
- * check if the linked list is empty, get the length of the linked list, and
- * check if a specific card is present in the linked list.
+ * CardLinkedList class represents a linked list of cards. It provides methods
+ * to add, remove, and check for cards in the list, as well as to play a card
+ * onto a pile.
  *
  * @author Joshua Breite
  */
 public class CardLinkedList {
   private Node head;
 
-  // Constructor
   private class Node {
     Card card;
     Node next;
 
     /**
-     * Constructor for Node class
+     * Constructor for the Node class
      *
      * @param card the card to be stored in the node
      */
@@ -42,10 +41,10 @@ public class CardLinkedList {
   }
 
   /**
-   * Check if a specific card is present in the linked list
+   * Check if the linked list contains a specific card
    *
-   * @param card the card to be checked for presence in the linked list
-   * @return true if the card is present, false otherwise
+   * @param card the card to be checked for in the linked list
+   * @return true if the card is present in the linked list, false otherwise
    */
   public boolean hasCard(Card card) {
     Node current = head;
@@ -63,11 +62,12 @@ public class CardLinkedList {
    * Get the card at a specific index in the linked list
    *
    * @param index the index of the card to be retrieved
-   * @return the card at the specified index
-   * @throws IndexOutOfBoundsException if the index is out of bounds
+   * @return the card at the specified index in the linked list
+   * @throws IndexOutOfBoundsException if the index is negative or exceeds the
+   *                                   length of the linked list
    */
   public Card getCardAt(int index) {
-    // Out of bounds check: if the index is negative, throw an exception
+    // Check if the index is negative
     if (index < 0) {
       throw new IndexOutOfBoundsException("Index must be non-negative");
     }
@@ -75,10 +75,8 @@ public class CardLinkedList {
     Node current = head;
     int currentIndex = 0;
     while (current != null) {
-      /**
-       * If the current index matches the specified index, return the card at that
-       * index
-       */
+      // If the current index matches the specified index, return the card at the
+      // current node
       if (currentIndex == index) {
         return current.card;
       }
@@ -90,7 +88,7 @@ public class CardLinkedList {
   }
 
   /**
-   * Add a card to the end of the linked list
+   * Add a card to the front of the linked list.
    *
    * @param card the card to be added to the linked list
    */
@@ -106,7 +104,6 @@ public class CardLinkedList {
    * @param card the card to be removed from the linked list
    */
   public void remove(Card card) {
-    // Base case: if the linked list is empty, return
     if (head == null) {
       return;
     }
@@ -154,22 +151,19 @@ public class CardLinkedList {
   }
 
   /**
-   * Play a card from the hand onto the pile. This method checks if any card in
-   * the
-   * hand can be played on top of the pile's top card. If a valid card is found,
-   * it is removed from the hand and added to the pile.
+   * Play a card from the linked list onto a pile.
    *
-   * @param pile the CardLinkedList representing the pile of cards
+   * @param pile the pile onto which the card will be played
    * @return true if a card was successfully played, false otherwise
    */
   public boolean play(CardLinkedList pile) {
     if (pile.isEmpty())
       return false;
 
-    // The top of the pile is the first card
     Card topCard = pile.getCardAt(0);
     Node current = head;
 
+    // Traverse the linked list to find a card that can be played on top of the card
     while (current != null) {
       if (current.card.isValidPlay(topCard)) {
         Card cardToPlay = current.card;
