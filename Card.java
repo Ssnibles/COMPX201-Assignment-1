@@ -43,13 +43,22 @@ public class Card {
    */
   public String print() {
     String numberString;
-    numberString = switch (number) {
-      case 1 -> "Ace";
-      case 11 -> "Jack";
-      case 12 -> "Queen";
-      case 13 -> "King";
-      default -> Integer.toString(number);
-    };
+    switch (number) {
+      case 1:
+        numberString = "Ace";
+        break;
+      case 11:
+        numberString = "Jack";
+        break;
+      case 12:
+        numberString = "Queen";
+        break;
+      case 13:
+        numberString = "King";
+        break;
+      default:
+        numberString = Integer.toString(number);
+    }
     return numberString + " of " + suit;
   }
 

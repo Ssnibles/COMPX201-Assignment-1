@@ -5,7 +5,7 @@
  */
 public class Test {
   public static void main(String[] args) {
-    System.out.println("1.Card Logic Tests ");
+    System.out.println("1.Card Logic Tests");
     Card aceHearts = new Card(1, "Hearts");
     Card twoHearts = new Card(2, "Hearts");
     Card kingSpades = new Card(13, "Spades");
